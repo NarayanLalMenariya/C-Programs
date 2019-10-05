@@ -1,0 +1,51 @@
+/*
+Use This Pointer to call another member function of same class
+Print Address of this pointer also.
+*/
+
+#include<iostream>
+using namespace std;
+class Base
+{
+public:
+    int num;
+    Base();
+    ~Base();
+    void printNum();
+    void modifyNum();
+};
+
+Base::Base()
+{
+    cout << " Base Constructor"<<endl;
+    num=10;
+}
+Base::~Base()
+{
+    cout << " Base Destructor" << endl;
+}
+void Base::printNum()
+{
+    cout << " PrintNum method , Num :" << num << endl;
+    this->modifyNum();
+    void *a = this;
+    cout << " Address of this ptr :" << this << endl;
+    cout << " Address of this ptr :" << a << endl;
+
+    cout << " PrintNum method , Num :" << num << endl;
+}
+void Base::modifyNum()
+{
+    num=20;
+    cout << " modifyNum method, Num :" << num << endl;
+}
+int main()
+{
+    Base obj;
+    obj.printNum();
+    cout << " Address of obj :" << &obj << endl;
+    return true;
+}
+
+==========================================================================================
+
