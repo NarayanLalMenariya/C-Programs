@@ -1,0 +1,195 @@
+/*
+virtual function : Used to achieve run time polymorphism.
+*/
+
+1. what happens if Get() method is defined in both base class and derived class.
+====================================================================================
+#include<iostream>
+using namespace std;
+class Base
+{
+public:
+    void Get()
+    {
+        cout << " Base class Get function"  << endl;
+    }
+};
+class Derived: public Base
+{
+public:
+
+    void Get()
+    {
+        cout << " Derived class Get function" << endl;
+    }
+
+};
+int main()
+{
+    Base bobj;
+    Derived dobj;
+
+    bobj.Get();
+    dobj.Get();
+
+    return 1;
+
+}
+
+=========================
+output:
+Base class Get function
+Derived class Get function
+==========================
+
+-----------------------------------------------------
+
+2. How to access only Derived class Get() function by avoiding use of derived class obj.
+=========================================================================================
+1. use virtual keyword with base class Get() function 
+2. and access Get() method by using base class pointer which consist the address of derived class
+object --> known as run time polymorphism. Here Late binding will happen.
+
+#include<iostream>
+using namespace std;
+class Base
+{
+public:
+    virtual void Get()
+    {
+        cout << " Base class Get function"  << endl;
+    }
+};
+class Derived: public Base
+{
+public:
+
+    //virtual void Get() -> its also correct only. but no need to use.
+    void Get()
+    {
+        cout << " Derived class Get function" << endl;
+    }
+
+};
+int main()
+{
+    Base *bptr;
+    Derived dobj;
+
+    bptr = &dobj;
+
+    bptr->Get();
+    return 1;
+
+}
+
+========================
+output: Derived class Get function
+========================
+
+--------------------------------------------------------------------------------
+
+3. what happens if Set() method is defined in both base class and derived class
+but virtual keyword is not present and we are accessing that using base class pointer.
+==========================================================================================
+--> Here compile time polymorphism will happen so base class Set() method will get called.
+
+#include<iostream>
+using namespace std;
+class Base
+{
+public:
+    virtual void Get()
+    {
+        cout << " Base class Get function"  << endl;
+    }
+    void Set()
+    {
+        cout << " Base class Set function"  << endl;
+    }
+};
+class Derived: public Base
+{
+public:
+
+    //virtual void Get() -> its also correct only. but no need to use.
+    void Get()
+    {
+        cout << " Derived class Get function" << endl;
+    }
+    void Set()
+    {
+        cout << " Derived class Set function"  << endl;
+    }
+
+};
+int main()
+{
+    Base *bptr;
+    Derived dobj;
+
+    bptr = &dobj;
+
+    //bptr->Get();
+    bptr->Set();
+    return 1;
+
+}
+
+========================
+output: Base class Set function
+========================
+
+---------------------------------------------------------------------
+
+4. what happens if print() function is defined in derived class but not in 
+base class and we try to access it using base class pointer.
+===========================================================================
+--> Will give error.
+
+#include<iostream>
+using namespace std;
+class Base
+{
+public:
+    virtual void Get()
+    {
+        cout << " Base class Get function"  << endl;
+    }
+};
+class Derived: public Base
+{
+public:
+
+    //virtual void Get() -> its also correct only. but no need to use.
+    void Get()
+    {
+        cout << " Derived class Get function" << endl;
+    }
+    void print()
+    {
+        cout << " Derived class print function" << endl;
+    }
+
+};
+int main()
+{
+    Base *bptr;
+    Derived dobj;
+
+    bptr = &dobj;
+
+    bptr->print();
+    return 1;
+
+}
+
+========================
+output:
+ Error: class Base has no member function : print()
+========================
+
+
+
+
+
