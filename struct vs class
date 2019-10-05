@@ -1,0 +1,96 @@
+/*
+ struct vs class in c++
+*/
+
+1. Members of a class are private by default and members of a struct are public by default.
+===========================================================================================
+
+Example :
+
+#include<iostream>
+using namespace std;
+struct Student
+{
+    string name;
+};
+int main()
+{
+    Student obj;
+    obj.name = "Narayan";
+    cout << "Name :" << obj.name <<endl;
+    return 0;
+}
+
+=======================
+output : Name : Narayan
+=======================
+
+#include<iostream>
+using namespace std;
+class Student
+{
+    string name;
+};
+int main()
+{
+    Student obj;
+    obj.name = "Narayan";
+    cout << "Name :" << obj.name <<endl;
+    return 0;
+}
+
+=======================
+output : compile time error : name is private.
+=======================
+-----------------------------------------------------------------------------
+
+2. When struct inherit the base class , default access specifier is public 
+while if a derived class inherit the base class ,default access specifier is private.
+=======================================================================================
+#include<iostream>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+};
+struct Derived:Student{};
+
+int main()
+{
+    Derived obj;
+    obj.name = "Narayan";
+    cout << "Name :" << obj.name <<endl;
+    return 0;
+}
+
+===============================
+Output: Name : Narayan
+===============================
+
+include<iostream>
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+};
+class Derived:Student{};
+
+int main()
+{
+    Derived obj;
+    obj.name = "Narayan";
+    cout << "Name :" << obj.name <<endl;
+    return 0;
+}
+
+===================================
+output: compile time error : name is inaccessible
+===================================
+
+
+
+
