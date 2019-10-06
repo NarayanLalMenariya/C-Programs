@@ -6,6 +6,22 @@ virtual function : Used to achieve run time polymorphism.
 also virtual keyword can be used but not mandatory.
 
 3. vritual constructor is pissoble but virtual destructor are not possible.
+
+
+what is need of vritual funtions or run time polymorphism:
+-----------------------------
+
+Let say car is a class. Every car have milage, cost, speed, fuel capacity etc.
+but differet - different car's BMW , audi, honda have their own milage , cost etc. 
+now car have same functionality.
+
+in c++ when we want to achieve this we can do it by declaring a class Car()
+which have method Cost(), Milage(), Speed(), FuelCapacity() with virtual keyword.
+
+and can declare other classes BMW(), AUDI(), Honda() they also implements same method.
+and override the base class method. Here binding of function will happen at run time .
+depending upon the address pointed by base class pointer with any of the derived class.
+
 */
 
 1. what happens if Get() method is defined in both base class and derived class.
