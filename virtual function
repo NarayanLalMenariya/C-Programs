@@ -1,5 +1,11 @@
 /*
 virtual function : Used to achieve run time polymorphism.
+
+1. virtual function can not be static or friend functio of any other class.
+2. virtual keyword should be there with function in base class. In derived class
+also virtual keyword can be used but not mandatory.
+
+3. vritual constructor is pissoble but virtual destructor are not possible.
 */
 
 1. what happens if Get() method is defined in both base class and derived class.
