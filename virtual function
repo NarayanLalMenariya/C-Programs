@@ -93,6 +93,7 @@ output: Derived class Get function
 but virtual keyword is not present and we are accessing that using base class pointer.
 ==========================================================================================
 --> Here compile time polymorphism will happen so base class Set() method will get called.
+--> By default early binding happens in C++. Late binding is achieved with the help of virtual keyword
 
 #include<iostream>
 using namespace std;
