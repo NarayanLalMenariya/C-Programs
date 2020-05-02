@@ -1,6 +1,10 @@
-==============================================
-// Array - Liner Data Structure.
-==============================================
+==============================================================================================
+// May 02,2020
+// Narayan Lal Menariya
+//                                Array - Liner Data Structure.
+// Below problem statements are solved while explaining to my friend that one problem can be
+// solved in multiple ways. Best solution can be choosen later based upon time complexity etc.
+===============================================================================================
 #include<stdio.h>
 #include<conio.h>
 #include<string.h>
