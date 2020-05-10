@@ -1,4 +1,5 @@
 //================================================================
+// Note: This is just a simple program for to explain stack concept using array. Structure is not used.
 // 1. Stack : Liner Data Stucture.
 // 2. Stack is a LIFO(Last in First out) structure or we can say FILO(First in Last out).
 // 3. push() function is used to insert new elements into the Stack and pop() function 
