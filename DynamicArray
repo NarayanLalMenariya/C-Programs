@@ -98,6 +98,13 @@ int main()
 	
 	ptr = realloc(ptr,newSize*sizeof(int));
 	
+	
+	//default elements by realloc()
+	printf("\nDefault value after realloc(garbage):\n");
+	for(i=0;i<newSize;i++)
+		printf("%d ",*(ptr+i));
+	
+	
 	//Enter elements
 	printf("Enter value for array from %d to %d",n,newSize);
 	for(i=n;i<newSize;i++)
