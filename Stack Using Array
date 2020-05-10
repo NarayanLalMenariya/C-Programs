@@ -1,0 +1,117 @@
+//================================================================
+// 1. Stack : Liner Data Stucture.
+// 2. Stack is a LIFO(Last in First out) structure or we can say FILO(First in Last out).
+// 3. push() function is used to insert new elements into the Stack and pop() function 
+//    is used to remove an element from the stack. Both insertion and removal are allowed
+//    at only one end of Stack called Top.
+// 4. Stack is said to be in Overflow state when it is completely full and is said to 
+//    be in Underflow state if it is completely empty
+//
+// Narayan Lal Menariya                               10 May,2020
+//================================================================
+
+// A simple c program to understand stack.
+#include<stdio.h>
+#include<stdbool.h>
+int top = -1;
+//---------------------------------------------
+//Push Method: Used to insert element in stack
+//---------------------------------------------
+void push(int size, int *stack)
+{
+	if(top == size-1)
+		printf("\nStack Overflow");
+	else
+	{
+		printf("\nEnter Element:");
+		top++;
+		scanf("%d",&stack[top]);
+	}
+}
+
+//----------------------------------------------
+//Pop method: Used to delete element from stack
+//----------------------------------------------
+void pop(int size, int *stack)
+{
+	if(top == -1)
+		printf("\nStack Underflow");
+	else
+	{
+		int elem = stack[top];
+		top--;
+		printf("\nDeleted Elements:%d",elem);
+	}
+}
+
+//-----------------------------------------------
+//Display method: used to diplay stack elements
+//-----------------------------------------------
+void display(int stack[])
+{
+	int i=0;
+	if(top == -1)
+		printf("\nEmpty Stack");
+	else
+	{
+		for(i=0;i<=top;i++)
+		{
+			printf("\nStack Element:%d",stack[i]);
+		}
+	}
+}
+
+//------------------------------------------------
+//main method of program execution
+//------------------------------------------------
+int main()
+{
+	int size = 0, choice=0;
+	printf("Enter Statck Size:");
+	scanf("%d",&size);
+	
+	int stack[size];
+	bool exitFlag = false;
+	printf("Choices:\n1:Push Element\n2:Pop Element\n3:Display Stack Element\n4:Exit");
+	while(1)
+	{
+		if(exitFlag==true)
+		{
+			break;
+		}
+		
+		printf("\nEnter Choice (1:Push/2:Pop/3:Disp/4:Exit): ");
+		scanf("%d",&choice);
+		switch(choice)
+		{
+			case 1:
+				{
+					push(size, stack);
+				}
+				break;
+			case 2:
+				{
+					pop(size, stack);		
+				}
+				break;
+			case 3:
+				{
+					display(stack);
+				}
+				break;
+			case 4:
+				{
+					exitFlag = true;	
+				}
+				break;
+			default:
+				{
+					printf("\nInvalid choice:%d",choice);
+				}
+				break;
+		}
+	}
+	
+	return 0;
+}
+
