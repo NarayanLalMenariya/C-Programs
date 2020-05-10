@@ -1,0 +1,118 @@
+//================================================================
+// Dynamic memory allocation: a procedure in which the size of a 
+// data structure (like Array) is changed during the runtime.
+// There are 4 library functions provided by C defined under <stdlib.h> 
+// header file to facilitate dynamic memory allocation in C programming.
+//
+// Narayan Lal Menariya               10 May, 2020
+//================================================================
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+	int *ptr, n, i;
+	printf("Enter no of element required:");
+	scanf("%d",&n);
+	
+	//-----------------------------------------------------
+	//1. Use malloc method to allocate run time memory
+	// malloc: It returns a pointer of type void which can be cast into a pointer of any form.
+	// syntax: ptr = (cast-type*) malloc(byte-size)
+	//-----------------------------------------------------
+	ptr = (int*)malloc(n*sizeof(int));
+	
+	if(ptr==NULL)
+	{
+		printf("\nMemory is not allocated\n");
+		return 0;
+	}	
+	else
+	{
+		printf("\nDefault value by malloc memthod are(garbage):\n");
+		for(i=0;i<n;i++)
+			printf("%d ",*(ptr+i));
+		
+		
+		//Get input element
+		for(i=0;i<n;i++)
+		{
+			printf("\nEnter Array element:");
+			scanf("%d",&ptr[i]);
+		}	
+		//print element
+		printf("\nArray elements are:\n");
+		for(i=0;i<n;i++)
+			printf("%d ",*(ptr+i));
+	}
+	
+	//------------------------------------------
+	//2. de-allocate memory using : free(ptr)
+	//------------------------------------------
+	free(ptr);
+
+	//print array element again: garbage output
+	printf("\nArray element after memeory de-allocation:\n");
+	for(i=0;i<n;i++)
+		printf("%d ",ptr[i]);
+		
+	
+	//-------------------------------------------
+	//3. Allocate memory using calloc():
+	//syntax: ptr = (cast-type*)calloc(n, element-size);
+	//-------------------------------------------
+	
+	ptr = (int*)calloc(n,sizeof(int));
+	if(ptr==NULL)
+	{
+		printf("Failed to allocate memory\n");
+		return 0;
+	}
+	else
+	{
+		printf("\nDefault value by calloc method are(0):\n");
+		for(i=0;i<n;i++)
+			printf("%d ",*(ptr+i));
+			
+		//get input element 
+		for(i=0;i<n;i++)
+		{
+			printf("\nEnter array element:");
+			scanf("%d",&(*(ptr+i)));
+		}
+		
+		//print array elements
+		printf("\nArray elements are:\n");
+		for(i=0;i<n;i++)
+			printf("%d ",*(ptr+i));
+		
+	}
+	
+	//---------------------------------------------------
+	//3. Re-Allocate array using realloc()
+	//syntax: ptr = realloc(ptr, newSize);
+	// realloc() method will not remove already present values from memory
+	//----------------------------------------------------
+	int newSize=0;
+	printf("\nEnter new array size:\n");
+	scanf("%d",&newSize);
+	
+	ptr = realloc(ptr,newSize*sizeof(int));
+	
+	//Enter elements
+	printf("Enter value for array from %d to %d",n,newSize);
+	for(i=n;i<newSize;i++)
+	{
+		printf("\nEnter element:");
+		scanf("%d",&ptr[i]);
+	}
+	
+	//print all elements of array
+	printf("\nComplete array elemets are:\n");
+	for(i=0;i<newSize;i++)
+		printf("%d ",*(ptr+i));
+	
+	//Don't forget to de-allocate memory.
+	free(ptr);
+	
+	return 0;
+}
