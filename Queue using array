@@ -1,0 +1,128 @@
+//===========================================================================
+// Queue: Liner Data Structure
+// Program to understand Queue using array. Use of structure, dynamic memory allocation 
+// etc is not used.
+// 1. Elements are inserted at REAR end while deleted from FRONT end.This makes queue as 
+//    FIFO(First in First Out) data structure, which means that element inserted first will be removed first.
+// 2. The process to add an element into queue is called Enqueue and the process of removal of an element from 
+//    queue is called Dequeue
+// 3. Application: CPU Task scehduling by kernel usign waiting queue & I/O queue
+      (b) In real life scenario, Call Center phone systems uses Queues to hold people calling them in an order,
+          until a service representative is free.
+      (c) 3.	Handling of interrupts in real-time systems. The interrupts are handled in the same order as they arrive i.e First come first served.
+      
+// Narayan Lal Menariya                                 11 May, 2020
+//=============================================================================
+#include<stdio.h>
+#include<stdbool.h>
+int front = -1, rear = -1;
+//------------------------------------------------
+//Enqueue Method: Used to insert element in Queue
+//------------------------------------------------
+void Enqueue(int size, int *Queue)
+{	
+	if(front == -1)
+		front++;
+		
+	// Note: Here one twist is there once rear reaches to size-1
+	// it will say queue is full. event though front = 1 mean space is present for 
+	// 1 element but Currently not supporting shifting operation.	
+	if(rear == size-1)
+		printf("\nQueue is full");
+	else
+	{		
+		printf("\nEnter Element:");
+		rear++;
+		scanf("%d",&Queue[rear]);
+	}
+}
+
+//--------------------------------------------------
+//DeQueue method: Used to delete element from Queue
+//--------------------------------------------------
+void Dequeue(int size, int *Queue)
+{
+	if(front > rear)
+	{
+		front = -1 ;
+		rear  = -1;
+	}
+	if(front == -1)
+		printf("\nQueue is empty");
+	else
+	{
+		int elem = Queue[front];
+		front++;
+		printf("\nDeleted Elements:%d",elem);
+	}
+}
+
+//-------------------------------------------------
+//Display method: used to diplay Queue elements
+//-------------------------------------------------
+void Display(int Queue[])
+{
+	int i=0;
+	if(front > rear || front == -1)
+		printf("\nQueue is empty");
+	else
+	{
+		for(i=front;i<=rear;i++)
+		{
+			printf("\nQueue Element:%d",Queue[i]);
+		}
+	}
+}
+
+//------------------------------------------------
+//main method of program execution
+//------------------------------------------------
+int main()
+{
+	int size = 0, choice=0;
+	printf("Enter Queue Size:");
+	scanf("%d",&size);
+	
+	int Queue[size];
+	bool exitFlag = false;
+	while(1)
+	{
+		if(exitFlag==true)
+		{
+			break;
+		}
+		
+		printf("\nEnter Choice (1:Enqueue/2:Dequeue/3:Display/4:Exit): ");
+		scanf("%d",&choice);
+		switch(choice)
+		{
+			case 1:
+				{
+					Enqueue(size, Queue);
+				}
+				break;
+			case 2:
+				{
+					Dequeue(size, Queue);		
+				}
+				break;
+			case 3:
+				{
+					Display(Queue);
+				}
+				break;
+			case 4:
+				{
+					exitFlag = true;	
+				}
+				break;
+			default:
+				{
+					printf("\nInvalid choice:%d",choice);
+				}
+				break;
+		}
+	}
+	
+	return 0;
+}
