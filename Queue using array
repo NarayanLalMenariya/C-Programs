@@ -7,10 +7,10 @@
 // 2. The process to add an element into queue is called Enqueue and the process of removal of an element from 
 //    queue is called Dequeue
 // 3. Application: CPU Task scehduling by kernel usign waiting queue & I/O queue
-      (b) In real life scenario, Call Center phone systems uses Queues to hold people calling them in an order,
-          until a service representative is free.
-      (c) 3.	Handling of interrupts in real-time systems. The interrupts are handled in the same order as they arrive i.e First come first served.
-      
+//      (b) In real life scenario, Call Center phone systems uses Queues to hold people calling them in an order,
+//          until a service representative is free.
+//      (c) Handling of interrupts in real-time systems. The interrupts are handled in the same order as they arrive i.e First come first served.
+//      
 // Narayan Lal Menariya                                 11 May, 2020
 //=============================================================================
 #include<stdio.h>
