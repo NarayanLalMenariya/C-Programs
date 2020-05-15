@@ -1,0 +1,253 @@
+//=============================================
+// Singly Linked List: Linear Data Sturcture.
+//
+// Narayan Lal Menariya             May 10,2020
+//=============================================
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node
+{
+	int data;
+	struct Node *next;
+};
+
+//head always points to the first node
+struct Node *head 		= NULL;
+struct Node *newNode 	= NULL;
+
+//method to create new node
+void CreateNode(int data)
+{
+	// Use malloc to allocate runtime memory
+	newNode 		= (struct Node*)malloc(1*sizeof(struct Node));
+	newNode->data 	= data;
+	newNode->next	= NULL;
+	
+}
+
+//method to insert data in linked list
+int InsertNode(int data)
+{
+	printf("\nInsertNode:- NodeRcvd Req to insert :%d in linked list.",data);
+	CreateNode(data);
+	//Check if its first node to be insert
+	if(head == NULL)
+	{
+		head = newNode;
+	}
+	else
+	{
+		// Start Curr
+		struct Node *CurrentPtr = head;
+		while(CurrentPtr->next != NULL)
+		{
+			CurrentPtr = CurrentPtr->next;
+		}
+		CurrentPtr->next = newNode;
+	}
+	return 1;
+}
+
+//method to display data of linked list
+int Display()
+{
+	struct Node *CurrentPtr = head;
+	
+	if(head == NULL)
+	{
+		printf("\nList is empty");
+		return 1;
+	}
+	
+	printf("\nLinked List Data:[ ");
+	while(CurrentPtr!= NULL)
+	{
+		printf("%d ",CurrentPtr->data);
+		printf("]->[ ");
+		CurrentPtr = CurrentPtr->next;
+	}
+	printf("NULL ]");	
+	
+	return 1;
+}
+//Insert at specific position
+int InsertAtPosition(int data, int position)
+{
+	printf("\nInsertAtPosition:- Rcvd Req to insert :%d at position: %d.",data,position);
+	CreateNode(data);
+	int counter 			= 1;
+	int noOfNode 			= 1;
+	struct Node *CurrentPtr = head;
+	
+	if(head == NULL && position > 1)
+	{
+		printf("\nList is empty and trying to insert element at position:%d. Can not be inserted",position);
+		return -1;
+	}
+	else if(head == NULL && position == 1)
+	{
+		return(InsertNode(data));
+	}
+	
+	//Get no of node present in this linked list
+	while(CurrentPtr->next != NULL)
+	{
+		CurrentPtr = CurrentPtr->next;
+		noOfNode++;
+	}
+	
+	if(noOfNode < position)
+	{
+		printf("\nNo of element present in linked list are:%d, Position Rcvd is:%d. Can not be inserted",
+			noOfNode, position);
+		return -1;
+	}
+	
+	//Initialize CurrentPtr again to head and add element
+	CurrentPtr = head;
+	while(counter != position-1)
+	{
+		CurrentPtr = CurrentPtr->next; 
+		counter++;
+	}
+	
+	//Add New Node
+	newNode->next 		= CurrentPtr->next;
+	CurrentPtr->next	= newNode;
+}
+
+//Insert Data after value present in llist
+int InsertAftData(int newData, int oldData)
+{	
+	printf("\nInsertAftData:- Rcvd Req to insert new data: %d after old data: %d",newData,oldData);
+	struct Node* CurrentPtr = head;
+	
+	//Check if its after first node
+	if(CurrentPtr->data == oldData)
+	{
+		return InsertAtPosition(newData,2);
+	}
+	
+	CreateNode(newData);
+	while(CurrentPtr->data != oldData && CurrentPtr->next != NULL)
+	{
+		CurrentPtr = CurrentPtr->next;
+	}
+	
+	if(CurrentPtr->data != oldData)
+	{
+		printf("\nNo Such Data is present in linked list");
+		return -1;
+	}
+	//Insert Node
+	newNode->next 		= CurrentPtr->next;
+	CurrentPtr->next 	= newNode; 
+}
+
+
+//Delelte node from position
+int DeleteAtPosition(int position)
+{
+	printf("\nDeleteAtPosition:-Rcvd Position:%d",position);
+	int noOfNode = 0;
+	int counter  = 1;
+	struct Node *CurrentPtr = head;
+
+
+	//Check if no node is present
+	if(head == NULL)
+	{
+		printf("\nDeleteAtPosition:- List is empty.");
+		return -1;
+	}
+	
+	
+	//check if only one node is present & node to be delete is also first node.
+	if(CurrentPtr->next == NULL && position == 1)
+	{
+		printf("\nDeleteAtPosition:- First node deleted. Data:%d",CurrentPtr->data);
+		head = head->next;
+		return 1;
+	}
+	
+	//Get no of node present in this linked list
+	while(CurrentPtr->next != NULL)
+	{
+		CurrentPtr = CurrentPtr->next;
+		noOfNode++;
+	}
+	
+	if(noOfNode < position)
+	{
+		printf("\nNo of element present in linked list are:%d, Position Rcvd is:%d. Can not be deleted",
+			noOfNode, position);
+		return -1;
+	}
+	
+	if(position == 1 && noOfNode > 1)
+	{
+		CurrentPtr =  head;
+		int dt = CurrentPtr->data;
+		head = CurrentPtr->next;
+		printf("\nDeleteAtPosition:- Deleted node:%d",dt);
+		return 1;
+	}
+	
+	//Initialize CurrentPtr again to head and add element
+	CurrentPtr = head;
+	while(counter < position -1)
+	{
+		CurrentPtr = CurrentPtr->next; 
+		counter++;
+	}
+	
+	int dt = CurrentPtr->next->data;
+	CurrentPtr->next = CurrentPtr->next->next;
+	printf("\nDeleteAtPosition:- Deleted node:%d",dt);
+}
+
+//main  method
+int main()
+{
+	//Insert At position(Data, Position)
+	InsertAtPosition(13,3);	
+	InsertAtPosition(19,1);	
+	Display();
+	DeleteAtPosition(1);
+	Display();
+	
+	//Insert Node Sequentially -> Insert at end
+	InsertNode(10);
+	InsertNode(20);
+	InsertNode(30);
+	InsertNode(40);
+	InsertNode(50);
+	Display();
+	
+	//Insert at specific position(data,position)
+	InsertAtPosition(13,3);	
+	Display();
+	InsertAtPosition(15,9);
+	
+	//Insert after data(NewData, OldData)
+	InsertAftData(41,19);
+	InsertAftData(23,40);
+	InsertAftData(100,200);
+	InsertAftData(200,50);
+	InsertAftData(100,200);
+	Display();
+	
+
+	//Delete At Position(Position)
+	DeleteAtPosition(3);
+	Display();
+	DeleteAtPosition(1);
+	Display();
+	return 0;
+}
+
+
+
+
