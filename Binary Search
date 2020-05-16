@@ -1,0 +1,59 @@
+//===================================================================
+// Binary Search: Simple program to explain concept of binary search.
+// Array must be sorted then only binary search can be applied.
+// Time Complexity by linear search : O(n).
+// Time Complexity by binary search : O(log n).  
+//
+// Narayan Lal Menariya                      May 10,2020
+//====================================================================
+
+#include<stdio.h>
+int main()
+{
+	int size, ele,i, low,mid,high;
+	
+	printf("Enter Array Size:");
+	scanf("%d",&size);
+	int arr[size];
+	
+	for(i=0;i<size;i++)
+	{
+		printf("\nEnter Array Element:");
+		scanf("%d",&arr[i]);
+	}
+	
+	printf("\nEnter element to search:");
+	scanf("%d",&ele);
+	
+	
+	low=0;
+	high=size-1;
+	
+	int flag = 0, it=0;
+	while(low <= high)
+	{
+		it++;
+		mid = (low+high)/2;
+		
+		if(arr[mid] == ele)
+		{
+			printf("%d found at position:%d. Iterator:%d",arr[mid], mid+1,it);
+			flag=1;
+			break;
+		}
+		
+		if(ele > arr[mid])
+			low = mid+1;
+		else
+			high = mid-1;
+			
+	}
+	
+	if(flag==0)
+	{
+		printf("\nNo Such value is present in array");
+	}
+	
+	return 0;
+}
+
