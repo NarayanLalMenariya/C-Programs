@@ -1,5 +1,5 @@
 //===================================================================
-// Binary Search: Simple program to explain concept of binary search.
+// Binary Search: Very simple program to explain concept of binary search.
 // Array must be sorted then only binary search can be applied.
 // Time Complexity by linear search : O(n).
 // Time Complexity by binary search : O(log n).  
